@@ -150,8 +150,13 @@ def train(model, network_input, network_output):
         mode='min'
     )
     callbacks_list = [checkpoint]
-
-    model.fit(network_input, network_output, epochs=200, batch_size=64, callbacks=callbacks_list)
+    plt.plot(epoch, loss, )
+    history = model.fit(network_input, network_output, epochs=200, batch_size=64, callbacks=callbacks_list)
+    plt.plot(history.history['loss'])
+    plt.title('model loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.show()
 
 if __name__ == '__main__':
     train_network()
