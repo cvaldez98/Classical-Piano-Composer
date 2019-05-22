@@ -4,6 +4,7 @@ import glob
 import pickle
 import numpy
 from music21 import converter, instrument, note, chord
+import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
@@ -13,6 +14,7 @@ from keras.utils import np_utils
 from keras.callbacks import ModelCheckpoint
 from matplotlib import pyplot as plt
 from matplotlib.font_manager import FontProperties
+from IPython.display import clear_output
 
 class PlotLosses(keras.callbacks.Callback):
     def on_train_begin(self, logs={}):
