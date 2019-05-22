@@ -37,7 +37,8 @@ class PlotLosses(keras.callbacks.Callback):
         plt.plot(self.x, self.losses, label="loss")
         plt.plot(self.x, self.val_losses, label="val_loss")
         plt.legend()
-        plt.show();
+        # plt.show();
+        plt.savefig("loss.png")
     
 
 def train_network():
@@ -97,6 +98,7 @@ def get_notes():
     with open('data/notes', 'wb') as filepath:
         pickle.dump(notes, filepath)
     c = 0
+    plt.figure(1)
     for key in pitch_occurrences:
         # print("label: ", key)
         # print("plotting at index c: ", c)
@@ -175,15 +177,10 @@ def train(model, network_input, network_output):
         save_best_only=True,
         mode='min'
     )
+    plt.figure(2)
     plot_losses = PlotLosses()
     callbacks_list = [checkpoint, plot_losses]
-    plt.plot(epoch, loss, )
-    history = model.fit(network_input, network_output, epochs=200, batch_size=64, callbacks=callbacks_list)
-    plt.plot(history.history['loss'])
-    plt.title('model loss')
-    plt.ylabel('loss')
-    plt.xlabel('epoch')
-    plt.show()
+    model.fit(network_input, network_output, epochs=200, batch_size=64, callbacks=callbacks_list)
 
 if __name__ == '__main__':
     train_network()
